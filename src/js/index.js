@@ -1,198 +1,154 @@
+// Paineis Variavel//
+const paineis = document.querySelectorAll('.image')
+// cards Abaixo//
+const cards = document.querySelectorAll('.card')
+let index = 0
 
-
-const imagesPainel = document.querySelectorAll('.image');
-const card1 = document.querySelector('#card-pro1');
-const card2 = document.querySelector('#card-pro2');
-const card3 = document.querySelector('#card-pro3');
-const card4 = document.querySelector('#card-pro4');
-const card = document.querySelectorAll('.card');
-const modal = document.querySelector('#productsmodal');
-const close = document.querySelector('#btn-close');
-const painel = document.querySelector('.product-panel');
-const imagesModal = document.querySelectorAll('.imagemodal');
-const cardModal1 = document.querySelector('#card-modal1');
-const cardModal2 = document.querySelector('#card-modal2');
-const cardModal3 = document.querySelector('#card-modal3');
-const cardModal4 = document.querySelector('#card-modal4');
-const cardModal = document.querySelectorAll('.card-modal');
-const btnNext = document.querySelector('.btn-avancar');
-const btnPrevious = document.querySelector('.btn-voltar');
-let nuImage = 0;
-const imageCard = document.querySelectorAll('.element');
-const btnPlus = document.querySelector('#btnplus');
-const btnMinus = document.querySelector('#btnminus');
-const painelQtd = document.querySelector('.qtd-painel');
-const imageCardModal = document.querySelectorAll('.elementModal');
-let qtdProduct = 0;
-
-
-function showImage(imagemAtual, element) {
-    element.forEach(element => {
-        element.classList.remove('mostrar');
+// Função para exibição//
+function show(elementsClick, elements, className) {
+  elementsClick.forEach((elementsClick, index) => {
+    elementsClick.addEventListener('click', function () {
+      elements.forEach(element => {
+        element.classList.remove(className)
+      })
+      elements[index].classList.add(className)
+      this.index = index
     })
-
-    element[imagemAtual].classList.add('mostrar');
-
-
+  })
 }
 
-function checkoutteste(elements, elementclick, nameClass) {
-    elementclick.forEach((elementclick, index) => {
-        // element.classList.remove(nameClass);
-        elementclick.addEventListener('click', function () {
-            elements.forEach(element => {
-                element.classList.remove(nameClass);
-            })
-            elements[index].classList.add(nameClass);
-
-        })
-        console.log(elementclick);
-
-    })
-
+function searchByIndex(index, elements, className) {
+  elements.forEach(element => {
+    element.classList.remove(className)
+  })
+  elements[index].classList.add(className)
+  this.index = index
+  console.log(index)
 }
 
-console.log(imagesPainel);
-console.log(card);
-function checkout(imagemAtual, element, nameClass) {
-    element.forEach(element => {
+//mostra imagem apartir dos cards
+show(cards, paineis, 'mostrar')
 
-        element.classList.remove(nameClass);
-    })
+// selcionar bordas no card faz aparecer
+show(cards, cards, 'pro')
+//deixa o elemento com opacity na imagem
+const elements = document.querySelectorAll('.element')
+show(cards, elements, 'checkout')
 
-    element[imagemAtual].classList.add(nameClass);
+//Modal
 
-
-}
-
-
-
-
-function toggleClass(operacao, nomeClass, elementoDiv) {
-    if (operacao === 'remove') {
-        elementoDiv.classList.remove(nomeClass);
-    } else if (operacao === 'add') {
-        elementoDiv.classList.add(nomeClass);
-    } else {
-        console.log(`${operacao} Operação Invalidação`);
-    }
-
-}
-
-checkoutteste(imagesPainel, card, 'mostrar');
-
-// card1.addEventListener('click', function () {
-//     showImage(1, imagesPainel);
-//     checkout(0, imageCard, 'checkout');
-//     checkout(0, card, 'pro')
-
-// })
-// card2.addEventListener('click', function () {
-//     showImage(2, imagesPainel);
-//     checkout(1, imageCard, 'checkout');
-//     checkout(1, card, 'pro')
-
-// })
-// card3.addEventListener('click', function () {
-//     showImage(3, imagesPainel);
-//     checkout(2, imageCard, 'checkout');
-//     checkout(2, card, 'pro')
-
-// })
-// card4.addEventListener('click', function () {
-//     showImage(4, imagesPainel);
-//     checkout(3, imageCard, 'checkout');
-//     checkout(3, card, 'pro')
-
-// })
-
-
-
-cardModal1.addEventListener('click', function () {
-
-    showImage(0, imagesModal);
-    nuImage = 0;
-    checkout(0, imageCardModal, 'checkout');
-    checkout(0, cardModal, 'pro');
-
-})
-cardModal2.addEventListener('click', function () {
-    showImage(1, imagesModal);
-    nuImage = 1;
-    checkout(1, imageCardModal, 'checkout');
-    checkout(1, cardModal, 'pro')
-})
-cardModal3.addEventListener('click', function () {
-    showImage(2, imagesModal);
-    nuImage = 2;
-    checkout(2, imageCardModal, 'checkout');
-    checkout(2, cardModal, 'pro');
-})
-cardModal4.addEventListener('click', function () {
-    showImage(3, imagesModal);
-    nuImage = 3;
-    checkout(3, imageCardModal, 'checkout');
-    checkout(3, cardModal, 'pro');
-})
-
-
-// () => toggleClass('remove', 'mostrar', modal)
-close.addEventListener('click', () => toggleClass('remove', 'mostrar', modal))
-
+//abrir e fechar o modal
+const painel = document.querySelector('.product-panel')
+const modal = document.querySelector('.product-modal')
+const btnClose = document.querySelector('.close')
+//abrir modal
 painel.addEventListener('click', function () {
-    toggleClass('add', 'mostrar', modal);
-    nuImage = 0;
-    showImage(nuImage, imagesModal);
+  modal.classList.add('mostrar')
+  // show(cards, imagesModal, 'mostrar');
+  searchByIndex(0, imagesModal, 'mostrar')
 })
 
+//fechar modal
+btnClose.addEventListener('click', function () {
+  modal.classList.remove('mostrar')
+})
+//mostra imagem do modal apartir dos cards
+const imagesModal = document.querySelectorAll('.imagemodal')
+const cardsModal = document.querySelectorAll('.card-modal')
 
+//mostra a imagem apartir do click do cardModal
+show(cardsModal, imagesModal, 'mostrar')
+//bordas do cardModal
+show(cardsModal, cardsModal, 'pro')
+
+//opacity na imagem selecionada do Modal
+const elementsModal = document.querySelectorAll('.elementModal')
+show(cardsModal, elementsModal, 'checkout')
+
+const btnPrevious = document.querySelector('#btn-voltar')
+const btnNext = document.querySelector('#btn-avancar')
 btnNext.addEventListener('click', function () {
-
-    if (nuImage === imagesModal.length - 1) {
-        return;
-    } else {
-        nuImage++;
-        showImage(nuImage, imagesModal);
-    }
-
+  if (index === imagesModal.length - 1) {
+    return
+  } else {
+    index++
+    searchByIndex(index, imagesModal, 'mostrar')
+    searchByIndex(index, cardsModal, 'pro')
+    searchByIndex(index, elementsModal, 'checkout')
+  }
+})
+btnPrevious.addEventListener('click', function () {
+  if (index <= 0) {
+    return
+  } else {
+    index--
+    searchByIndex(index, imagesModal, 'mostrar')
+    searchByIndex(index, cardsModal, 'pro')
+    searchByIndex(index, elementsModal, 'checkout')
+  }
 })
 
-btnPrevious.addEventListener('click', function () {
-    if (nuImage === 0) {
-        return;
-    } else {
-        nuImage--;
-        showImage(nuImage, imagesModal);
-    }
-
-});
-
-//qtd Produtos
+const btnPlus = document.querySelector('#btnplus')
+const btnMinus = document.querySelector('#btnminus')
+let qtdPainel = document.querySelector('.qtd-painel')
+let qtdProduct = 0
 
 btnPlus.addEventListener('click', function () {
-    qtdProduct++;
-    painelQtd.textContent = qtdProduct;
-
+  qtdProduct++
+  qtdPainel.textContent = qtdProduct
 })
+
 btnMinus.addEventListener('click', function () {
-    if (qtdProduct <= 0) {
-
-        return;
-    }
-    qtdProduct--;
-    painelQtd.textContent = qtdProduct;
-
-
+  if (qtdProduct === 0) {
+    return
+  }
+  qtdProduct--
+  qtdPainel.textContent = qtdProduct
 })
 
+/* codigo para comprar hardcode */
+const btnCart = document.querySelector('#btncart')
+const labelqtd = document.querySelector('.qtd')
+const qtdCart = document.querySelector('.qtd')
+const cartContent = document.querySelector('.cart-content')
+const textEmpty = document.querySelector('.text-empty')
+const priceCart = document.querySelector('#price')
+const valueCart = document.querySelector('#value')
+let resultado = 0
 
+btnCart.addEventListener('click', function () {
+  if (qtdProduct > 0) {
+    labelqtd.textContent = qtdProduct
+    qtdCart.classList.add('qtdexibir')
+    cartContent.classList.add('produto')
+    textEmpty.classList.remove('empty')
 
+    // valor
+    resultado = qtdProduct * 125
+    priceCart.textContent = `$125.00 x ${qtdProduct}`
+    valueCart.textContent = '$ ' + resultado + '.00'
+  } else {
+    qtdCart.classList.remove('qtdexibir')
+    cartContent.classList.remove('produto')
+    textEmpty.classList.add('empty')
+  }
+})
 
+const btnIconCart = document.querySelector('.icon-cart')
+const popupCart = document.querySelector('.cart')
 
+btnIconCart.addEventListener('click', function () {
+  if (!popupCart.classList.contains('exibir')) {
+    popupCart.classList.add('exibir')
+  } else {
+    popupCart.classList.remove('exibir')
+  }
+})
 
+const del = document.querySelector('.del')
 
-
-
-
-
-
+del.addEventListener('click', function () {
+  cartContent.classList.remove('produto')
+  qtdCart.classList.remove('qtdexibir')
+  textEmpty.classList.add('empty')
+})
